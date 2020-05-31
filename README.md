@@ -1,5 +1,7 @@
 # Player
 
+This is just a template for the actual thing
+
 ## How it works
  - We will receive a submission from the user.
  - We will store it inside this project (dirname=submission)
