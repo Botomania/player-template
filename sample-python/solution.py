@@ -8,6 +8,6 @@ The problem given is:
 
 def solution(state):
     """
-    Returns the next state
+    Returns the action to be taken
     """
     return state + 1

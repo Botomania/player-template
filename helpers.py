@@ -25,17 +25,17 @@ class Runner:
         return self.runners[self.fmt](state)
 
     def runner_py(self, state):
-        new_state = self.sol(state)
+        action = self.sol(state)
 
-        return new_state
+        return action
 
     def runner_exec(self, state):
         state = str(state)
 
         p = subprocess.Popen(self.sol, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-        new_state = p.communicate(input=state.encode())[0].decode("utf-8")
+        action = p.communicate(input=state.encode())[0].decode("utf-8")
 
-        return new_state.strip()
+        return action.strip()
 
 
 @app.route("/", methods=["POST"])
@@ -44,9 +44,9 @@ def handle():
     Pass state to function and return
     """
     state = request.json["state"]
-    new_state = r.run(state)
+    action = r.run(state)
 
-    return jsonify({"state": new_state})
+    return jsonify({"action": action})
 
 
 @app.route("/end", methods=["POST"])
