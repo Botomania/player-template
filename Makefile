@@ -6,4 +6,4 @@ run:
 build:
 	rm -rf submission
 	cp -r sample-python submission
-	docker build -t test .
+	docker build -t test-player .
