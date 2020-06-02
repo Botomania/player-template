@@ -4,8 +4,8 @@ This file must be present in a python based submission
 If the submission format is python,
     This file must expose a function named 'solution' with the signature
 
-    def func(state):
-        return newState
+    def solution(state):
+        return action
 
 If the submission format is executable,
     There must be an executable named 'solution' which reads the state
