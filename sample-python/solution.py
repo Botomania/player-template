@@ -6,8 +6,12 @@ The problem given is:
 """
 
 
+def add_one(x):
+    return x + 1
+
+
 def solution(state):
     """
     Returns the action to be taken
     """
-    return state + 1
+    return add_one(state)
