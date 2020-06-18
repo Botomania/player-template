@@ -54,8 +54,8 @@ def quit():
     """
     Closes everything and shuts down
     """
-    print("Quitting...")
-    sys.exit(0)
+    request.environ.get("werkzeug.server.shutdown")()
+    return "Shutting down..."
 
 
 def run(format, solution):
