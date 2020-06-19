@@ -1,0 +1,48 @@
+openapi: 3.0.0
+info:
+  description: This is the server managing submitted code and actions on them
+  version: 0.0.1
+  title: "interactive::player"
+  contact:
+    email: yoogottam.khandelwal@students.iiit.ac.in
+paths:
+  /:
+    post:
+      summary: Get the action from submitted code
+      description: It's this player's turn! The request will contain the current state. This submission's action is expected as the result
+      operationId: get_action
+      requestBody:
+        description: The current state in json
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  type: object
+                  example: 42
+      responses:
+        200:
+          description: Successfully extracted action from code
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  action:
+                    type: object
+                    example: 43
+  /end:
+    post:
+      summary: Quit this server
+      description: On an invalid move/timeout/the policy set by the game setter, this player is no longer eligible to play. Shutting down server to reduce resource usage
+      operationId: quit
+      responses:
+        200:
+          description: Starts the process of shutting down
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Shutting down...
