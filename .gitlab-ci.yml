@@ -1,5 +1,7 @@
 docker:
   image: docker
+  services:
+    - docker:dind
   variables:
     IMAGE_TAG: "$DOCKER_USERNAME/interactive:player-${CI_COMMIT_SHA:0:8}"
   before_script:
