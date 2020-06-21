@@ -1,0 +1,33 @@
+docker:
+  image: docker
+  variables:
+    IMAGE_TAG: "$DOCKER_USERNAME/interactive:player-${CI_COMMIT_SHA:0:8}"
+  before_script:
+    - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+  script:
+    - docker build -t "$IMAGE_TAG" .
+    - docker push "$IMAGE_TAG"
+  only:
+    - master
+
+client:
+  image:
+    name: openapitools/openapi-generator-cli
+    entrypoint: ["/bin/sh", "-c"]
+  variables:
+    CLI: "/opt/openapi-generator/modules/openapi-generator-cli/target"
+  before_script:
+    - apk add --update git openssh-client
+    - mkdir -p ~/.ssh && echo "$SSH_DEPLOY_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - git config --global user.email felicity-threads@outlook.com
+    - git config --global user.name felicity-threads
+  script:
+    - git clone git@gitlab.com:felicity-threads/interactive-player-client.git /client
+    - rm -rf /client
+    - java -jar "$CLI" -i spec.yaml -g python -c config.json -o /client
+    - cd /client && git add -A
+    - git commit -m "${CI_COMMIT_SHA:0:8}"
+    - git push origin master
+  only:
+    - master
