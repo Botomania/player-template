@@ -9,6 +9,7 @@ docker:
     - export IMAGE_TAG_PREFIX="$DOCKER_USERNAME/interactive:player"
     - export IMAGE_TAG="$IMAGE_TAG_PREFIX-${CI_COMMIT_SHA:0:8}"
     - docker build -t "$IMAGE_TAG" .
+    - docker tag "$IMAGE_TAG" "$IMAGE_TAG_PREFIX"
     - docker push "$IMAGE_TAG"
     - docker push "$IMAGE_TAG_PREFIX"
   only:
