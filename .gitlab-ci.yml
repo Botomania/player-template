@@ -6,9 +6,11 @@ docker:
     - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
     - cp -r sample-python submission
   script:
-    - export IMAGE_TAG="$DOCKER_USERNAME/interactive:player-${CI_COMMIT_SHA:0:8}"
+    - export IMAGE_TAG_PREFIX="$DOCKER_USERNAME/interactive:player"
+    - export IMAGE_TAG="$IMAGE_TAG_PREFIX-${CI_COMMIT_SHA:0:8}"
     - docker build -t "$IMAGE_TAG" .
     - docker push "$IMAGE_TAG"
+    - docker push "$IMAGE_TAG_PREFIX"
   only:
     - master
 
