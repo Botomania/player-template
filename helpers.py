@@ -49,7 +49,7 @@ def handle():
     return jsonify({"action": action})
 
 
-@app.route("/end", methods=["POST"])
+@app.route("/quit", methods=["POST"])
 def quit():
     """
     Closes everything and shuts down
