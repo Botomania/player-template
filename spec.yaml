@@ -33,7 +33,7 @@ paths:
                   action:
                     type: object
                     example: 43
-  /end:
+  /quit:
     post:
       summary: Quit this server
       description: On an invalid move/timeout/the policy set by the game setter, this player is no longer eligible to play. Shutting down server to reduce resource usage
