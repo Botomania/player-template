@@ -8,6 +8,8 @@ info:
 paths:
   /:
     post:
+      tags:
+        - "player"
       summary: Get the action from submitted code
       description: It's this player's turn! The request will contain the current state. This submission's action is expected as the result
       operationId: get_action
@@ -35,6 +37,8 @@ paths:
                     example: 43
   /quit:
     post:
+      tags:
+        - "player"
       summary: Quit this server
       description: On an invalid move/timeout/the policy set by the game setter, this player is no longer eligible to play. Shutting down server to reduce resource usage
       operationId: quit
