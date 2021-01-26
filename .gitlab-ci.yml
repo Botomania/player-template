@@ -31,7 +31,7 @@ client:
   script:
     - git clone git@gitlab.com:felicity-iiith/interactive-matches/player-client.git /client
     - rm -rf /client/*
-    - java -jar "$CLI" generate -i spec.yaml -g python -c config.json -o /client
+    - java -jar "$CLI" generate -i spec.yaml -g python-legacy -c config.json -o /client
     - cd /client && git add -A
     - git commit -m "${CI_COMMIT_SHA:0:8}" || true
     - git push origin master
